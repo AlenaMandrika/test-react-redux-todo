@@ -1,25 +1,50 @@
-import update from 'immutability-helper'
-
-let defaultState = {
-  arrayOfLists: [],
-  attendeeList: {
-    'firstName': '',
-    'lastName': '',
-    'date': null,
-    'email': '',
-    'phone': '',
-    'address': '',
-    id: (Math.random() * 100)
-  }
-}
-
-export default (state = defaultState, action) => {
+const todo = (state = [], action) => {
   switch (action.type) {
-    case 'CHANGE_STATE_PROPS':
-      return update(state, {
-        [action.state.prop]: {$set: action.state.value}
-      })
-    default:
+    case 'ADD_TODO': {
+      return [
+        ...state,
+        {
+          id: action.id,
+          text: action.text,
+          completed: false
+        },
+      ]
+    }
+
+    case 'REMOVE_TODO':
+      return[
+        ...state.slice(0, action.id),
+        ...state.slice(action.id + 1)
+      ];
+
+    case 'TOGGLE_TODO':
+      return[
+        ...state.slice(0, action.id),
+        {
+          text: state[action.id].text,
+          completed: !state[action.id].completed
+        },
+        ...state.slice(action.id + 1)
+      ];
+
+    default: {
       return state
+    }
   }
 }
+
+const filterReducer = (state = 'ALL', action) => {
+  switch(action.type){
+    case 'SHOW_ALL':
+      return 'ALL';
+    case 'SHOW_COMPLETED':
+      return 'COMPLETED';
+    case 'SHOW_ACTIVE':
+      return 'ACTIVE';
+
+    default:
+      return state;
+  }
+}
+
+export { todo, filterReducer }

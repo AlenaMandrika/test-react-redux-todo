@@ -1,0 +1,6 @@
+.line{
+    text-decoration: line-through;
+}
+.itemText, a{
+    cursor: pointer;
+}

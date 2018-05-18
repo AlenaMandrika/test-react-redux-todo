@@ -1,4 +1,7 @@
 import { combineReducers } from 'redux'
-import main from './main'
+import { todo, filterReducer } from './main'
 
-export default combineReducers({main})
+export default combineReducers({
+  items: todo,
+  filter: filterReducer
+})

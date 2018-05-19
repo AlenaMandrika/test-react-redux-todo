@@ -11,6 +11,7 @@ export default class TodoList extends Component {
     this.changeInput = this.changeInput.bind(this)
     this.onEnterAddItem = this.onEnterAddItem.bind(this)
     this.addItem = this.addItem.bind(this)
+    this.editItem = this.editItem.bind(this)
   }
 
   changeInput(e){
@@ -26,6 +27,11 @@ export default class TodoList extends Component {
         inputText: ''
       })
     }
+  }
+
+  editItem (e) {
+    let text = this.testInput.value
+    console.log(text)
   }
 
   onEnterAddItem(e){
@@ -53,39 +59,55 @@ export default class TodoList extends Component {
             if(filter === 'ALL'){
               return(
                 <div key={key}>
-                    <span className={item.completed ? "itemText line" : "itemText"}
-                          onClick={this.props.toggleTodo.bind(this, key)}
-                    >{item.text}</span>
+                  <input
+                    type="text"
+                    className={item.completed ? "itemText line" : "itemText"}
+                    onChange={this.props.editTodo.bind(this, item.text)}
+                    defaultValue={item.text}
+                    ref={(input) => this.testInput = input}
+                  />
                   <button onClick={this.props.removeTodo.bind(this, key)}>Remove</button>
+                  <button onClick={this.editItem}>Save</button>
+                  <button onClick={this.props.toggleTodo.bind(this, key)}>Complete</button>
                 </div>
               )
             } else if (filter === 'ACTIVE' && item.completed === false){
               return(
                 <div key={key}>
-                  <span
+                  <input
+                    type="text"
                     className={item.completed ? "itemText line" : "itemText"}
-                    onClick={this.props.toggleTodo.bind(this, key)}
-                  >{item.text}</span>
+                    onChange={this.props.editTodo.bind(this, item.text)}
+                    defaultValue={item.text}
+                    ref={(input) => this.testInput = input}
+                  />
                   <button onClick={this.props.removeTodo.bind(this, key)}>Remove</button>
+                  <button>Save</button>
+                  <button onClick={this.props.toggleTodo.bind(this, key)}>Complete</button>
                 </div>
               )
             } else if (filter === 'COMPLETED' && item.completed === true){
               return(
                 <div key={key}>
-                  <span
+                  <input
+                    type="text"
                     className={item.completed ? "itemText line" : "itemText"}
-                    onClick={this.props.toggleTodo.bind(this, key)}
-                  >{item.text}</span>
+                    onChange={this.props.editTodo.bind(this, item.text)}
+                    defaultValue={item.text}
+                    ref={(input) => this.testInput = input}
+                  />
                   <button onClick={this.props.removeTodo.bind(this, key)}>Remove</button>
+                  <button>Save</button>
+                  <button onClick={this.props.toggleTodo.bind(this, key)}>Complete</button>
                 </div>
               )
             }
           })}
         </div>
         <div>
-          <a onClick={showAll.bind(this)} className={filter === 'ALL' ? "filter" : ""}>All</a>
-          <a onClick={showActive.bind(this)} className={filter === 'ACTIVE' ? "filter" : ""}>Active</a>
-          <a onClick={showCompleted.bind(this)} className={filter === 'COMPLETED' ? "filter" : ""}>Completed</a>
+          <button onClick={showAll.bind(this)} className={filter === 'ALL' ? "filter" : ""}>All</button>
+          <button onClick={showActive.bind(this)} className={filter === 'ACTIVE' ? "filter" : ""}>Active</button>
+          <button onClick={showCompleted.bind(this)} className={filter === 'COMPLETED' ? "filter" : ""}>Completed</button>
         </div>
       </div>
     );

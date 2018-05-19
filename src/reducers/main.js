@@ -11,6 +11,20 @@ const todo = (state = [], action) => {
       ]
     }
 
+    case 'EDIT_TODO': {
+      return state.map((todo, id) => {
+        if(id === action.id) {
+          return {
+            ...todo,
+            text: todo.text,
+            id: todo.id
+          }
+        } else {
+          return todo
+        }
+      })
+    }
+
     case 'REMOVE_TODO':
       return[
         ...state.slice(0, action.id),

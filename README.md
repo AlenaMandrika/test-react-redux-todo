@@ -5,7 +5,6 @@ Prerequisites
 You need the following programs to be installed on your computer: Node.js
 
 Installation
-
 Clone the repo https://github.com/AlenaMandrika/test-react-redux-todo.git in chosen folder. 
 In the terminal run the command "npm install" to get all the required modules.
 

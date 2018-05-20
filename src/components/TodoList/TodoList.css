@@ -5,9 +5,25 @@
     cursor: pointer;
     color: inherit;
     outline: none;
-    border: none;
+    /*border: none;*/
     background: none;
 }
 button {
     cursor: pointer;
 }
+.input-text,.list {
+    margin-bottom: 30px;
+}
+.input-text input {
+    padding: 3px 168px 3px 5px;
+    outline: none;
+}
+input {
+    padding: 3px 205px 3px 5px;
+}
+.all,.active,.completed  {
+    background-color: lightgray;
+    outline: none;
+}
+
+
